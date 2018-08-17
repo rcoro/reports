@@ -1,0 +1,40 @@
+<div class="container">
+
+  <div class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">userId</th>
+        <th scope="col">title</th>
+        <th scope="col">completed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of pagedItems">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.userId}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.completed}}</td>
+      </tr>
+    </tbody>
+  </div>
+
+  <nav *ngIf="pager.pages && pager.pages.length">
+    <ul class="pagination text-capitalize">
+      <li [ngClass]="{'disabled': pager.currentPage === 1}" class="page-item">
+        <a class="page-link" (click)="setPage(pager.currentPage - 1)">previous</a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{'active': pager.currentPage === page}" class="page-item">
+        <a (click)="setPage(page)" class="page-link">{{page}}</a>
+      </li>
+
+      <li class="page-item" [ngClass]="{'disabled': pager.currentPage === pager.totalPages}">
+        <a class="page-link" (click)="setPage(pager.currentPage + 1)">next</a>
+      </li>
+      <li class="page-item" [ngClass]="{disabled: pager.currentPage === pager.totalPages}">
+        <a class="page-link" (click)="setPage(pager.totalPages)">last</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
